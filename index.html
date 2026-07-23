@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ParcelPath — Track your shipment</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header"><a class="brand" href="#"><span>↗</span>parcelpath</a><nav><a href="#track">Track</a><a href="#help">Help center</a></nav><a class="sign-in" href="admin.html">Business sign in</a></header>
+    <main>
+      <section class="hero" id="track">
+        <p class="eyebrow">GLOBAL SHIPMENT TRACKING</p>
+        <h1>Every package,<br><em>right on track.</em></h1>
+        <p class="intro">Enter a tracking number to see the latest delivery updates from DHL, Aramex, or FedEx — all in one place.</p>
+        <form class="tracker" id="trackerForm">
+          <label for="trackingNumber">Tracking number</label>
+          <div class="track-row"><input id="trackingNumber" autocomplete="off" placeholder="e.g. 1234 5678 9012" required /><button>Track shipment <span>→</span></button></div>
+          <div class="carriers" role="group" aria-label="Select courier"><span>Carrier</span><button type="button" class="carrier selected" data-carrier="auto">Auto-detect</button><button type="button" class="carrier" data-carrier="dhl">DHL</button><button type="button" class="carrier" data-carrier="aramex">Aramex</button><button type="button" class="carrier" data-carrier="fedex">FedEx</button></div>
+        </form>
+        <p class="privacy">⌁ Your tracking information is private and secure.</p>
+      </section>
+
+      <section class="result-shell" id="resultShell" hidden aria-live="polite">
+        <div class="result-top"><button class="back" id="back">← Track another package</button><span id="lastUpdated">Last updated just now</span></div><p id="apiError" hidden style="margin:0 0 13px;padding:10px 12px;border:1px solid #ffd2d7;border-radius:7px;background:#fff5f6;color:#a83b49;font-size:11px"></p>
+        <article class="shipment-summary">
+          <div class="carrier-logo" id="carrierLogo">DHL</div>
+          <div><p class="eyebrow" id="carrierName">DHL EXPRESS</p><h2 id="resultNumber">JD014600006281527</h2><p id="route">Lagos, NG <span>→</span> London, GB</p></div>
+          <div class="status-box"><span class="status in-transit" id="status">In transit</span><p id="eta">Estimated delivery <b>Tomorrow, by 6:00 PM</b></p></div>
+        </article>
+        <div class="detail-grid"><article class="timeline-card"><div class="detail-head"><div><h3>Shipment updates</h3><p>Follow your package every step of the way.</p></div><button id="refresh" style="background:#f1f4f9;border:0;border-radius:5px;padding:7px 10px;color:#526079;font:700 10px Manrope">↻ Refresh</button></div><div class="timeline" id="timeline"></div></article><aside class="delivery-card"><p class="eyebrow">DELIVERY DETAILS</p><h3 id="deliveryTitle">On its way</h3><div class="route-visual"><div class="location from"><i></i><strong id="originName">Origin</strong><small id="originCaption">Shipment picked up</small></div><div class="travel"><span>✈</span></div><div class="location to"><i></i><strong id="destinationName">Destination</strong><small id="destinationCaption">Expected destination</small></div></div><div class="help-box"><span>?</span><p><b>Need help with your delivery?</b><small>Contact the carrier for delivery changes.</small></p><a id="carrierLink" href="#help">Get support →</a></div></aside></div>
+      </section>
+
+      <section class="trusted"><p>TRACKING FROM THE WORLD'S TRUSTED CARRIERS</p><div><strong>DHL</strong><strong>aramex</strong><strong>FedEx</strong></div></section>
+      <section class="help" id="help"><div><p class="eyebrow">DELIVERY QUESTIONS?</p><h2>We make tracking simple.</h2></div><p>Use the number from your shipping confirmation. We'll automatically identify your carrier, or you can choose it before searching.</p></section>
+    </main>
+    <footer><a class="brand" href="#"><span>↗</span>parcelpath</a><small>© 2026 ParcelPath. Tracking made simple.</small><div><a href="#privacy">Privacy</a><a href="#terms">Terms</a></div></footer>
+    <script src="app.js"></script>
+  </body>
+</html>
