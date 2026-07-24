@@ -1,43 +1,14 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pukka Express — Track your shipment</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <header class="site-header"><a class="brand" href="#" aria-label="Pukka Express home"><img src="assets/pukka-express-logo.svg" alt="Pukka Express" style="width:142px;height:auto;display:block"></a><nav><a href="#track">Track</a><a href="#help">Help center</a></nav><a class="sign-in" href="admin.html">Business sign in</a></header>
-    <main>
-      <section class="hero" id="track"><img src="assets/pukka-express-logo.svg" alt="Pukka Express" style="width:240px;max-width:75%;height:auto;margin:0 auto 25px;display:block">
-        <p class="eyebrow">GLOBAL SHIPMENT TRACKING</p>
-        <h1>Every package,<br><em>right on track.</em></h1>
-        <p class="intro">Enter a tracking number to see the latest delivery updates from DHL, Aramex, or FedEx — all in one place.</p>
-        <form class="tracker" id="trackerForm">
-          <label for="trackingNumber">Tracking number</label>
-          <div class="track-row"><input id="trackingNumber" autocomplete="off" placeholder="e.g. 1234 5678 9012" required /><button>Track shipment <span>→</span></button></div>
-          <div class="carriers" role="group" aria-label="Select courier"><span>Carrier</span><button type="button" class="carrier selected" data-carrier="auto">Auto-detect</button><button type="button" class="carrier" data-carrier="dhl">DHL</button><button type="button" class="carrier" data-carrier="aramex">Aramex</button><button type="button" class="carrier" data-carrier="fedex">FedEx</button></div>
-        </form>
-        <p class="privacy">⌁ Your tracking information is private and secure.</p>
-      </section>
-
-      <section class="result-shell" id="resultShell" hidden aria-live="polite">
-        <div class="result-top"><button class="back" id="back">← Track another package</button><span id="lastUpdated">Last updated just now</span></div><p id="apiError" hidden style="margin:0 0 13px;padding:10px 12px;border:1px solid #ffd2d7;border-radius:7px;background:#fff5f6;color:#a83b49;font-size:11px"></p>
-        <article class="shipment-summary">
-          <div class="carrier-logo" id="carrierLogo">DHL</div>
-          <div><p class="eyebrow" id="carrierName">DHL EXPRESS</p><h2 id="resultNumber">JD014600006281527</h2><p id="route">Lagos, NG <span>→</span> London, GB</p></div>
-          <div class="status-box"><span class="status in-transit" id="status">In transit</span><p id="eta">Estimated delivery <b>Tomorrow, by 6:00 PM</b></p></div>
-        </article>
-        <div class="detail-grid"><article class="timeline-card"><div class="detail-head"><div><h3>Shipment updates</h3><p>Follow your package every step of the way.</p></div><button id="refresh" style="background:#f1f4f9;border:0;border-radius:5px;padding:7px 10px;color:#526079;font:700 10px Manrope">↻ Refresh</button></div><div class="timeline" id="timeline"></div></article><aside class="delivery-card"><p class="eyebrow">DELIVERY DETAILS</p><h3 id="deliveryTitle">On its way</h3><div class="route-visual"><div class="location from"><i></i><strong id="originName">Origin</strong><small id="originCaption">Shipment picked up</small></div><div class="travel"><span>✈</span></div><div class="location to"><i></i><strong id="destinationName">Destination</strong><small id="destinationCaption">Expected destination</small></div></div><div class="help-box"><span>?</span><p><b>Need help with your delivery?</b><small>Contact the carrier for delivery changes.</small></p><a id="carrierLink" href="#help">Get support →</a></div></aside></div>
-      </section>
-
-      <section class="trusted"><p>PUKKA EXPRESS CONNECTS YOU TO TRUSTED CARRIERS</p><div><strong>DHL</strong><strong>aramex</strong><strong>FedEx</strong></div></section>
-      <section class="help" id="help"><div><p class="eyebrow">DELIVERY QUESTIONS?</p><h2>We're here to help.</h2></div><p>Use the number from your shipping confirmation to track your parcel. For delivery support, email <a href="mailto:pukkaexpress.ng@gmail.com">pukkaexpress.ng@gmail.com</a> or call <a href="tel:+2348036316751">+234 803 631 6751</a>.</p></section>
-    </main>
-    <footer><a class="brand" href="#" aria-label="Pukka Express home"><img src="assets/pukka-express-logo.svg" alt="Pukka Express" style="width:112px;height:auto;display:block"></a><small>© 2026 Pukka Express. Logistics made simple.</small><div><a href="mailto:pukkaexpress.ng@gmail.com">Email support</a><a href="tel:+2348036316751">+234 803 631 6751</a></div></footer>
-    <script src="app.js"></script>
-  </body>
-</html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Pukka Express | Shipping made simple</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="site.css"></head>
+<body>
+<header class="container site-nav"><a href="index.html" class="site-logo" aria-label="Pukka Express home"><img src="assets/pukka-express-logo.svg" alt="Pukka Express"></a><nav class="nav-links" aria-label="Main navigation"><a href="services.html">Services</a><a href="routes.html">Routes</a><a href="tracking.html">Track shipment</a><a href="#support">Support</a></nav><a class="button" href="tracking.html">Track a shipment <span>→</span></a></header>
+<main>
+  <section class="hero"><div class="container hero-grid"><div><p class="eyebrow">DELIVERING WHAT MATTERS</p><h1>Shipping that keeps your world <em>moving.</em></h1><p class="lede">Pukka Express connects people and businesses to reliable local and international delivery through trusted carrier partners.</p><div class="hero-actions"><a class="button orange" href="tracking.html">Track shipment <span>→</span></a><a class="button outline" href="services.html">Explore our services</a></div></div><div class="hero-mark"><img src="assets/pukka-express-logo.svg" alt="Pukka Express"><p>Simple shipping. Clear updates. Dependable delivery.</p></div></div></section>
+  <section class="metrics"><div class="container"><div><strong>3+</strong><span>trusted global carrier partners</span></div><div><strong>Local & global</strong><span>delivery options built around your needs</span></div><div><strong>One place</strong><span>to follow every shipment</span></div></div></section>
+  <section class="section"><div class="container"><div class="section-head"><div><p class="eyebrow">WHAT WE DO</p><h2>Shipping options for every journey.</h2></div><p>Whether you are sending a document across town or a commercial shipment across borders, Pukka Express helps you choose the right route.</p></div><div class="cards"><article class="card"><div class="card-icon">↗</div><h3>Express delivery</h3><p>Fast, dependable parcel movement for time-sensitive documents and packages.</p></article><article class="card"><div class="card-icon">◎</div><h3>International shipping</h3><p>Connect to key destinations worldwide with carrier-backed delivery visibility.</p></article><article class="card"><div class="card-icon">▣</div><h3>Business logistics</h3><p>Practical shipping support for growing businesses, orders, and customer deliveries.</p></article></div></div></section>
+  <section class="section mist"><div class="container"><div class="section-head"><div><p class="eyebrow">POPULAR ROUTES</p><h2>From your door to theirs.</h2></div><a class="button outline" href="routes.html">View all routes</a></div><div class="route-panel"><div class="route-place"><small>STARTING FROM</small><strong>Nigeria</strong></div><div class="route-plane">✈</div><div class="route-place"><small>CONNECTING TO</small><strong>The world</strong></div><a class="button" href="tracking.html">Already shipped? Track it now <span>→</span></a></div></div></section>
+  <section class="section"><div class="container"><p class="eyebrow">CARRIER NETWORK</p><h2>Trusted connections, clearer shipping.</h2><p class="lede">We work across established carrier networks to give your shipments a dependable path from pickup to delivery.</p><div class="partner-row"><span>DHL</span><span>FedEx</span><span>Aramex</span></div></div></section>
+  <section class="cta" id="support"><div class="container cta-box"><div><p class="eyebrow">NEED HELP?</p><h2>Let’s make your next shipment easier.</h2><p class="lede">For delivery support or help with a tracking number, our team is here.</p></div><a class="button orange" href="mailto:pukkaexpress.ng@gmail.com">Contact support <span>→</span></a></div></section>
+</main>
+<footer class="footer"><div class="container"><div class="footer-top"><div><a class="site-logo" href="index.html"><img src="assets/pukka-express-logo.svg" alt="Pukka Express"></a><p>Logistics support for the moments, people, and businesses that matter to you.</p></div><div><h3>Explore</h3><div class="footer-links"><a href="services.html">Services</a><a href="routes.html">Routes</a><a href="tracking.html">Track shipment</a><a href="admin.html">Business portal</a></div></div><div><h3>Contact Pukka Express</h3><div class="footer-links"><a href="mailto:pukkaexpress.ng@gmail.com">pukkaexpress.ng@gmail.com</a><a href="tel:+2348036316751">+234 803 631 6751</a></div></div></div><div class="footer-bottom">© 2026 Pukka Express. All rights reserved.</div></div></footer>
+</body></html>
