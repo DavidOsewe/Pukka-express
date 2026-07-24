@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 230" role="img" aria-labelledby="title">
+  <title>Pukka Express</title>
+  <text x="18" y="142" fill="#42449c" font-family="Arial, sans-serif" font-size="132" font-weight="800" letter-spacing="4">PUKKA</text>
+  <path d="M176 48 282 2l-5 110-10-45q-10-20-33-7l-58 36Z" fill="#d78428"/>
+  <path d="M601 45 650 45l45 111h-29l-13-36h-57l-13 36h-29l47-111Zm-1 52h45l-22-54Z" fill="#42449c"/>
+  <path d="m623 78 22 32h-43l21-32Z" fill="#d78428"/>
+  <text x="328" y="210" fill="#42449c" font-family="Arial, sans-serif" font-size="59" letter-spacing="2">express</text>
+</svg>

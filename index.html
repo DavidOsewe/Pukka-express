@@ -3,16 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ParcelPath — Track your shipment</title>
+    <title>Pukka Express — Track your shipment</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <header class="site-header"><a class="brand" href="#"><span>↗</span>parcelpath</a><nav><a href="#track">Track</a><a href="#help">Help center</a></nav><a class="sign-in" href="admin.html">Business sign in</a></header>
+    <header class="site-header"><a class="brand" href="#" aria-label="Pukka Express home"><img src="assets/pukka-express-logo.svg" alt="Pukka Express" style="width:142px;height:auto;display:block"></a><nav><a href="#track">Track</a><a href="#help">Help center</a></nav><a class="sign-in" href="admin.html">Business sign in</a></header>
     <main>
-      <section class="hero" id="track">
+      <section class="hero" id="track"><img src="assets/pukka-express-logo.svg" alt="Pukka Express" style="width:240px;max-width:75%;height:auto;margin:0 auto 25px;display:block">
         <p class="eyebrow">GLOBAL SHIPMENT TRACKING</p>
         <h1>Every package,<br><em>right on track.</em></h1>
         <p class="intro">Enter a tracking number to see the latest delivery updates from DHL, Aramex, or FedEx — all in one place.</p>
@@ -34,10 +34,10 @@
         <div class="detail-grid"><article class="timeline-card"><div class="detail-head"><div><h3>Shipment updates</h3><p>Follow your package every step of the way.</p></div><button id="refresh" style="background:#f1f4f9;border:0;border-radius:5px;padding:7px 10px;color:#526079;font:700 10px Manrope">↻ Refresh</button></div><div class="timeline" id="timeline"></div></article><aside class="delivery-card"><p class="eyebrow">DELIVERY DETAILS</p><h3 id="deliveryTitle">On its way</h3><div class="route-visual"><div class="location from"><i></i><strong id="originName">Origin</strong><small id="originCaption">Shipment picked up</small></div><div class="travel"><span>✈</span></div><div class="location to"><i></i><strong id="destinationName">Destination</strong><small id="destinationCaption">Expected destination</small></div></div><div class="help-box"><span>?</span><p><b>Need help with your delivery?</b><small>Contact the carrier for delivery changes.</small></p><a id="carrierLink" href="#help">Get support →</a></div></aside></div>
       </section>
 
-      <section class="trusted"><p>TRACKING FROM THE WORLD'S TRUSTED CARRIERS</p><div><strong>DHL</strong><strong>aramex</strong><strong>FedEx</strong></div></section>
-      <section class="help" id="help"><div><p class="eyebrow">DELIVERY QUESTIONS?</p><h2>We make tracking simple.</h2></div><p>Use the number from your shipping confirmation. We'll automatically identify your carrier, or you can choose it before searching.</p></section>
+      <section class="trusted"><p>PUKKA EXPRESS CONNECTS YOU TO TRUSTED CARRIERS</p><div><strong>DHL</strong><strong>aramex</strong><strong>FedEx</strong></div></section>
+      <section class="help" id="help"><div><p class="eyebrow">DELIVERY QUESTIONS?</p><h2>We're here to help.</h2></div><p>Use the number from your shipping confirmation to track your parcel. For delivery support, email <a href="mailto:pukkaexpress.ng@gmail.com">pukkaexpress.ng@gmail.com</a> or call <a href="tel:+2348036316751">+234 803 631 6751</a>.</p></section>
     </main>
-    <footer><a class="brand" href="#"><span>↗</span>parcelpath</a><small>© 2026 ParcelPath. Tracking made simple.</small><div><a href="#privacy">Privacy</a><a href="#terms">Terms</a></div></footer>
+    <footer><a class="brand" href="#" aria-label="Pukka Express home"><img src="assets/pukka-express-logo.svg" alt="Pukka Express" style="width:112px;height:auto;display:block"></a><small>© 2026 Pukka Express. Logistics made simple.</small><div><a href="mailto:pukkaexpress.ng@gmail.com">Email support</a><a href="tel:+2348036316751">+234 803 631 6751</a></div></footer>
     <script src="app.js"></script>
   </body>
 </html>
