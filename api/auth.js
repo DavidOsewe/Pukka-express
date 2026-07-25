@@ -5,6 +5,6 @@ export default async function handler(req,res){
   if(!email||!password)return res.status(400).json({error:'Email and password are required.'});
   const response=await fetch(process.env.SUPABASE_URL.replace(/\/$/,'')+'/auth/v1/token?grant_type=password',{method:'POST',headers:{apikey:process.env.SUPABASE_ANON_KEY,'Content-Type':'application/json'},body:JSON.stringify({email,password})});
   const data=await response.json();
-  if(!response.ok)return res.status(401).json({error:'Invalid email or password.'});
+  if(!response.ok)return res.status(response.status).json({error:data.msg||data.error_description||data.error||'Unable to sign in with those credentials.'});
   return res.status(200).json({access_token:data.access_token,refresh_token:data.refresh_token,user:data.user});
 }
