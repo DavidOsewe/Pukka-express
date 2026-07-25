@@ -1,6 +1,6 @@
 import { adminRequest, configured, requireAdmin } from './supabase.js';
 const json=(res,body,status=200)=>res.status(status).json(body);
-const mapShipment=(shipment,events=[])=>({carrier:shipment.carrier==='standalone'?'Pukka Express':shipment.carrier.toUpperCase(),number:shipment.tracking_id,status:shipment.status,eta:shipment.status==='Delivered'?'Delivered':'Check Pukka Express updates',route:shipment.origin+' → '+shipment.destination,title:shipment.status,events:events.map(e=>[e.status+(e.note?' — '+e.note:''),e.location,new Date(e.event_time).toLocaleString('en-NG',{dateStyle:'medium',timeStyle:'short'})])});
+const mapShipment=(shipment,events=[])=>({carrier:shipment.carrier==='standalone'?'Pukka Express':shipment.carrier.toUpperCase(),carrierWaybill:shipment.carrier_waybill||null,number:shipment.tracking_id,status:shipment.status,eta:shipment.status==='Delivered'?'Delivered':'Check Pukka Express updates',route:shipment.origin+' → '+shipment.destination,title:shipment.status,events:events.map(e=>[e.status+(e.note?' — '+e.note:''),e.location,new Date(e.event_time).toLocaleString('en-NG',{dateStyle:'medium',timeStyle:'short'})])});
 
 export default async function handler(req,res){
   if(!configured())return json(res,{error:'Supabase is not configured.'},503);
