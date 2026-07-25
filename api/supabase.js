@@ -1,4 +1,4 @@
-const base=()=>process.env.SUPABASE_URL?.replace(/\/$/,'');
+const base=()=>process.env.SUPABASE_URL?.replace(/\/$/,'').replace(/\/rest\/v1$/,'');
 export const configured=()=>Boolean(base()&&process.env.SUPABASE_SERVICE_ROLE_KEY&&process.env.SUPABASE_ANON_KEY);
 export async function adminRequest(path,options={}){
   if(!configured())throw new Error('Supabase is not configured.');
