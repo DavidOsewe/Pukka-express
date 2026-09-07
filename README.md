@@ -1,23 +1,73 @@
-# ParcelPath customer tracker
+# Pukka Express
 
-A single-purpose customer shipment tracking page for DHL, Aramex, and FedEx.
+Customer tracking site and business portal for Pukka Express shipments, with optional live lookups for DHL, FedEx, and Aramex.
 
-## Run locally
+## Pages
 
-Open `index.html` for the customer experience. It displays sample tracking data if `/api/track` is not deployed.
+| Path | Purpose |
+|------|---------|
+| `index.html` | Marketing home |
+| `services.html` / `routes.html` | Services and routes |
+| `tracking.html` | Customer tracker (`app.js`) |
+| `admin.html` | Business portal (`admin.js`) — create shipments, publish status updates |
 
-## Enable live carrier lookups
+## API routes (Vercel)
 
-Deploy the `api/track.js` serverless endpoint (for example, as a Vercel API route), then add the secrets from `.env.example` to the deployment's encrypted environment configuration. Do not publish carrier credentials in the browser or commit them to Git.
+| Route | Methods | Auth | Role |
+|-------|---------|------|------|
+| `/api/health` | GET | Public | Health check |
+| `/api/auth` | POST | Public | Admin sign-in via Supabase Auth |
+| `/api/shipments` | GET (by tracking number) | Public | Customer tracking of Pukka IDs |
+| `/api/shipments` | GET (list) / POST / PATCH | Admin bearer token | Create, list, status updates |
+| `/api/track` | GET | Public | Live carrier tracking (`carrier` + `trackingNumber`) |
+| `/api/notify-shipment` | POST | Admin bearer token | Resend email on shipment create |
 
-After deployment, verify that `https://YOUR-DOMAIN/api/health` returns JSON. If it returns Vercel's `NOT_FOUND` page, the project was deployed from the wrong repository/root directory or has not been redeployed with the `api/` folder and `package.json` included.
+## Setup
 
-The DHL and FedEx routes are wired to their production APIs. Aramex is intentionally left as a provider adapter until the account's SOAP/REST setup details are supplied; its API setup is account-specific.
+1. **Supabase**
+   - Create a project and run `supabase/schema.sql` in the SQL editor.
+   - Create an Auth user (email/password) for staff.
+   - Promote that user:
+     ```sql
+     insert into public.profiles (id, is_admin)
+     values ('PASTE_AUTH_USER_UUID_HERE', true)
+     on conflict (id) do update set is_admin = true;
+     ```
+   - Copy Project URL, anon key, and service-role key into the deployment env.
 
-For FedEx, set `FEDEX_ENVIRONMENT=sandbox` during testing and change it to `production` (or omit it) only when you have production credentials. The connector supports `client_credentials`, `csp_credentials`, and `client_pc_credentials`; the latter two require the corresponding `FEDEX_CHILD_KEY` and `FEDEX_CHILD_SECRET` values.
+2. **Environment**  
+   Copy `.env.example` into your host’s encrypted environment (Vercel → Project → Settings → Environment Variables). Never commit real secrets.
 
-The FedEx tracking request sends `X-locale` (default `en_US`) and requests detailed scans. Change `FEDEX_LOCALE` only when a different FedEx-supported response locale is required.
+3. **Deploy**
+   - Root of the repo must include `api/`, `package.json`, and the HTML/CSS/JS assets.
+   - After deploy, `https://YOUR-DOMAIN/api/health` should return JSON like:
+     `{"status":"ok","service":"pukka-express-api",...}`
+   - If you see Vercel’s `NOT_FOUND` page, the project was deployed from the wrong root.
 
-## Shipment creation module
+4. **Carriers**
+   - **DHL**: set `DHL_API_KEY`. Production Track API is used.
+   - **FedEx**: set client id/secret. Use `FEDEX_ENVIRONMENT=sandbox` until production credentials are ready. Supports `client_credentials`, `csp_credentials`, and `client_pc_credentials` (child key/secret when required).
+   - **Aramex**: credentials are reserved in env; the adapter still needs the account-specific SOAP/REST contract before live calls work. Pukka IDs and manual updates still work.
 
-The Business portal can create a ParcelPath ID (`PP-YYYY-#####`) and optionally link a DHL, Aramex, or FedEx waybill. In this lightweight version, created shipments are stored in the browser's local storage and can be tracked with either ID from that same browser. Before using it with real customers or staff, connect the creation module to a database and protect the Business portal with authentication.
+5. **Email (optional)**
+   - Set `RESEND_API_KEY`, a verified `EMAIL_FROM`, and `PUBLIC_SITE_URL`.
+   - Only authenticated admins can trigger `/api/notify-shipment`.
+
+## Tracking behaviour
+
+1. Customer enters a number on `tracking.html`.
+2. The app first asks `/api/shipments?trackingNumber=...` (Pukka register).
+3. If the Pukka row has a linked DHL/FedEx/Aramex waybill, it tries `/api/track` for live scans.
+4. On carrier failure, it falls back to the Pukka event timeline.
+5. Unknown numbers still attempt carrier auto-detect (FedEx 12/15 digits, Aramex 10 digits, else DHL).
+
+## Local development
+
+Static pages open directly in a browser. API routes need a Node host (e.g. `vercel dev`) with env vars loaded. Without the API, the tracker shows clear configuration errors instead of fake sample data.
+
+## Security notes
+
+- Service-role key is server-only.
+- Admin routes require a Supabase access token whose profile has `is_admin = true`.
+- RLS is enabled on all tables; no public policies are defined — the service role bypasses RLS for the API.
+- Notify endpoint is admin-protected to prevent email abuse.
