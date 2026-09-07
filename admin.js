@@ -1,17 +1,354 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Pukka Express | Business Portal</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css"></head><body class="admin-page"><header class="site-header"><a class="brand pukka-admin-brand" href="index.html"><img src="assets/pukka-express-logo.svg" alt="Pukka Express"></a><a class="admin-home" href="tracking.html">← Customer tracking</a></header><main class="admin-main"><section class="login-card" id="loginCard"><p class="eyebrow">SECURE BUSINESS PORTAL</p><h1>Welcome back.</h1><p>Sign in to create and manage Pukka Express shipments.</p><form id="loginForm"><label>Email<input name="email" type="email" required></label><label>Password<input name="password" type="password" required></label><button>Sign in →</button><small id="loginError" hidden>Incorrect email or password.</small></form></section><section class="admin-dashboard" id="adminDashboard" hidden><div class="admin-title"><div><p class="eyebrow">PUKKA EXPRESS OPERATIONS</p><h1>Create and manage shipments</h1><p>Use a Pukka tracking ID for every shipment. Add a carrier waybill to connect it to live carrier scans.</p></div><button id="logout">Sign out</button></div><div class="admin-grid"><article class="create-card"><div class="detail-head"><div><h3>Create shipment</h3><p>Link a DHL, FedEx, or Aramex waybill when available.</p></div><span class="admin-badge">ADMIN</span></div><form id="createShipment"><p class="form-section">SENDER / ORIGIN</p><div class="form-grid"><label>Sender name *<input name="senderName" required></label><label>Sender email *<input name="senderEmail" type="email" required></label><label>Sender phone *<input name="senderPhone" type="tel" pattern="[0-9+ ()-]{7,20}" required></label><label>Street address *<input name="senderStreet" required></label><label>City / town *<input name="senderTown" pattern="[A-Za-z .'-]{2,}" required></label><label>ZIP / postal code *<input name="senderZip" maxlength="12" required></label><label>Country *<select name="senderCountry" required><option value="">Select country</option><option>Nigeria</option><option>Ghana</option><option>South Africa</option><option>Kenya</option><option>Egypt</option><option>Morocco</option><option>Ethiopia</option><option>Tanzania</option><option>Uganda</option><option>Rwanda</option><option>Senegal</option><option>Ivory Coast</option><option>Cameroon</option><option>Benin</option><option>Togo</option><option>United Kingdom</option><option>Ireland</option><option>France</option><option>Germany</option><option>Netherlands</option><option>Belgium</option><option>Spain</option><option>Portugal</option><option>Italy</option><option>Switzerland</option><option>Sweden</option><option>Norway</option><option>Denmark</option><option>Poland</option><option>United States</option><option>Canada</option><option>Mexico</option><option>Brazil</option><option>United Arab Emirates</option><option>Saudi Arabia</option><option>Qatar</option><option>Kuwait</option><option>Bahrain</option><option>Oman</option><option>India</option><option>China</option><option>Hong Kong</option><option>Singapore</option><option>Malaysia</option><option>Japan</option><option>South Korea</option><option>Australia</option><option>New Zealand</option><option>Turkey</option><option>Israel</option><option>Other</option></select></label></div><p class="form-section">RECIPIENT / DESTINATION</p><div class="form-grid"><label>Recipient name *<input name="recipient" required></label><label>Recipient email *<input name="recipientEmail" type="email" required></label><label>Recipient phone *<input name="recipientPhone" type="tel" pattern="[0-9+ ()-]{7,20}" required></label><label>Street address *<input name="recipientStreet" required></label><label>City / town *<input name="recipientTown" pattern="[A-Za-z .'-]{2,}" required></label><label>ZIP / postal code *<input name="recipientZip" maxlength="12" required></label><label>Country *<select name="recipientCountry" required><option value="">Select country</option><option>Nigeria</option><option>Ghana</option><option>South Africa</option><option>Kenya</option><option>Egypt</option><option>Morocco</option><option>Ethiopia</option><option>Tanzania</option><option>Uganda</option><option>Rwanda</option><option>Senegal</option><option>Ivory Coast</option><option>Cameroon</option><option>Benin</option><option>Togo</option><option>United Kingdom</option><option>Ireland</option><option>France</option><option>Germany</option><option>Netherlands</option><option>Belgium</option><option>Spain</option><option>Portugal</option><option>Italy</option><option>Switzerland</option><option>Sweden</option><option>Norway</option><option>Denmark</option><option>Poland</option><option>United States</option><option>Canada</option><option>Mexico</option><option>Brazil</option><option>United Arab Emirates</option><option>Saudi Arabia</option><option>Qatar</option><option>Kuwait</option><option>Bahrain</option><option>Oman</option><option>India</option><option>China</option><option>Hong Kong</option><option>Singapore</option><option>Malaysia</option><option>Japan</option><option>South Korea</option><option>Australia</option><option>New Zealand</option><option>Turkey</option><option>Israel</option><option>Other</option></select></label></div><p class="form-section">CARRIER DETAILS</p><div class="form-grid"><label>Carrier<select name="carrier"><option value="standalone">Pukka Express delivery</option><option value="dhl">DHL</option><option value="aramex">Aramex</option><option value="fedex">FedEx</option></select></label><label>Carrier waybill number<input name="waybill" placeholder="Optional for Pukka deliveries"></label><label>Weight (kg) *<input name="weight" type="number" min="0.01" step="0.01" required></label><label>Shipment price (₦) *<input name="price" type="number" min="0" step="0.01" required></label></div><div class="custom-id"><div><span>Pukka Express tracking ID</span><strong id="proposedId"></strong></div><button type="button" id="regenerate">↻ Generate another</button></div><button class="create-button">Create shipment <span>→</span></button><p class="created-message" id="createdMessage" hidden></p></form></article><aside class="admin-aside"><p class="eyebrow">TRACKING WORKFLOW</p><h3>Pukka ID + carrier waybill</h3><p>Customers can use either number. When a linked carrier has live tracking configured, a Pukka ID retrieves those carrier updates automatically.</p><a href="tracking.html">Open customer tracker →</a></aside></div><section class="status-card"><div><p class="eyebrow">PUKKA DELIVERY UPDATES</p><h2>Manually update a Pukka waybill</h2><p>Use this for Pukka Express deliveries that are not supplied by a carrier live-tracking API.</p></div><form id="statusUpdate"><label>Pukka tracking ID<input name="trackingNumber" id="statusShipment" list="statusShipmentList" required placeholder="Enter or select PUK tracking ID"><datalist id="statusShipmentList"></datalist></label><label>Current status<select name="status" required><option>Shipment received</option><option>Picked up</option><option>In transit</option><option>Out for delivery</option><option>Delivered</option><option>Delivery exception</option></select></label><label>Current location<input name="location" required placeholder="e.g. Ikeja, Nigeria"></label><label>Update note<input name="note" placeholder="Optional detail for the customer"></label><button class="create-button">Publish update →</button><p class="created-message" id="statusMessage" hidden></p></form></section><section class="shipment-register" id="shipmentRegister"><div class="register-head"><div><p class="eyebrow">SHIPMENT REGISTER</p><h2>Recently created shipments</h2></div><div><button type="button" id="downloadCsv">Download CSV</button> <button type="button" id="clearShipments">Clear browser data</button></div></div>
-<div class="shipment-filters">
-  <input id="filterSearch" placeholder="Search tracking ID, name, or waybill">
-  <select id="filterStatus">
-    <option value="">All statuses</option>
-    <option>Shipment received</option>
-    <option>Picked up</option>
-    <option>In transit</option>
-    <option>Out for delivery</option>
-    <option>Delivered</option>
-    <option>Delivery exception</option>
-  </select>
-  <label>From <input id="filterFrom" type="date"></label>
-  <label>To <input id="filterTo" type="date"></label>
-  <button type="button" id="clearFilters">Clear filters</button>
-</div>
-<div id="shipmentTable"></div></section></section></main><script src="admin.js"></script></body></html>
+const $ = (s) => document.querySelector(s);
+
+let token = sessionStorage.getItem('pukkaAccessToken') || '';
+let shipments = [];
+let filtered = [];
+let proposed = '';
+
+const api = async (path, options = {}) => {
+  const response = await fetch(path, {
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...(token ? { Authorization: 'Bearer ' + token } : {}),
+      ...(options.headers || {}),
+    },
+  });
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(data.error || 'Request failed.');
+  return data;
+};
+
+function newId() {
+  const year = new Date().getFullYear();
+  const n = String(Math.floor(10000 + Math.random() * 90000));
+  return `PUK-${year}-${n}`;
+}
+
+function setProposed() {
+  proposed = newId();
+  const el = $('#proposedId');
+  if (el) el.textContent = proposed;
+}
+
+function money(v) {
+  return Number(v || 0).toLocaleString('en-NG', {
+    style: 'currency',
+    currency: 'NGN',
+    maximumFractionDigits: 2,
+  });
+}
+
+function stamp(value) {
+  return value
+    ? new Date(value).toLocaleString('en-NG', { dateStyle: 'medium', timeStyle: 'short' })
+    : '—';
+}
+
+function renderTable() {
+  const table = $('#shipmentTable');
+  if (!table) return;
+
+  if (!filtered.length) {
+    table.innerHTML = '<p class="empty">No shipments match these filters.</p>';
+    return;
+  }
+
+  table.innerHTML = filtered
+    .map(
+      (x) => `<div class="register-row">
+        <div><strong>${x.tracking_id}</strong><small>${x.recipient_name || ''}</small></div>
+        <div><strong>${x.origin || ''} → ${x.destination || ''}</strong>
+          <small>${x.carrier_waybill ? 'Waybill: ' + x.carrier_waybill : 'Pukka Express delivery'}</small>
+        </div>
+        <div class="register-carrier">
+          ${x.carrier === 'standalone' ? 'PUKKA EXPRESS' : String(x.carrier || '').toUpperCase()}
+          <small>${x.status || ''} · ${stamp(x.updated_at || x.created_at)}</small>
+        </div>
+        <div>
+          <strong>${x.weight_kg ?? '—'} kg</strong>
+          <small>${money(x.price_ngn)}</small>
+          <small>Created ${stamp(x.created_at)}</small>
+          <a href="tracking.html" class="row-link">Customer view</a>
+        </div>
+      </div>`
+    )
+    .join('');
+}
+
+function applyFilters() {
+  const query = ($('#filterSearch')?.value || '').trim().toLowerCase();
+  const status = $('#filterStatus')?.value || '';
+  const from = $('#filterFrom')?.value || '';
+  const to = $('#filterTo')?.value || '';
+
+  filtered = shipments.filter((x) => {
+    const haystack = [x.tracking_id, x.recipient_name, x.carrier_waybill, x.sender_name]
+      .join(' ')
+      .toLowerCase();
+    const date = (x.created_at || '').slice(0, 10);
+    return (
+      (!query || haystack.includes(query)) &&
+      (!status || x.status === status) &&
+      (!from || date >= from) &&
+      (!to || date <= to)
+    );
+  });
+  renderTable();
+}
+
+async function render() {
+  shipments = await api('/api/shipments');
+  const list = $('#statusShipmentList');
+  if (list) {
+    list.innerHTML = shipments
+      .map(
+        (x) =>
+          `<option value="${x.tracking_id}">${x.recipient_name || ''} · ${x.status || ''}</option>`
+      )
+      .join('');
+  }
+  applyFilters();
+}
+
+async function dashboard() {
+  const active = Boolean(token);
+  const loginCard = $('#loginCard');
+  const adminDashboard = $('#adminDashboard');
+  if (loginCard) loginCard.hidden = active;
+  if (adminDashboard) adminDashboard.hidden = !active;
+
+  if (!active) return;
+
+  try {
+    await render();
+    setProposed();
+  } catch (error) {
+    token = '';
+    sessionStorage.removeItem('pukkaAccessToken');
+    if (loginCard) loginCard.hidden = false;
+    if (adminDashboard) adminDashboard.hidden = true;
+    const loginError = $('#loginError');
+    if (loginError) {
+      loginError.textContent = error.message;
+      loginError.hidden = false;
+    }
+  }
+}
+
+function csvValue(v) {
+  return '"' + String(v ?? '').replace(/"/g, '""') + '"';
+}
+
+function downloadCsv() {
+  const heads = [
+    'Pukka ID',
+    'Carrier',
+    'Carrier waybill',
+    'Status',
+    'Weight kg',
+    'Price NGN',
+    'Sender',
+    'Origin',
+    'Recipient',
+    'Destination',
+    'Recipient email',
+    'Recipient phone',
+    'Created at',
+    'Last updated',
+  ];
+  const body = filtered
+    .map((x) =>
+      [
+        x.tracking_id,
+        x.carrier,
+        x.carrier_waybill,
+        x.status,
+        x.weight_kg,
+        x.price_ngn,
+        x.sender_name,
+        x.origin,
+        x.recipient_name,
+        x.destination,
+        x.recipient_email,
+        x.recipient_phone,
+        stamp(x.created_at),
+        stamp(x.updated_at || x.created_at),
+      ]
+        .map(csvValue)
+        .join(',')
+    )
+    .join('\n');
+
+  const blob = new Blob([heads.map(csvValue).join(',') + '\n' + body], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'pukka-express-shipments.csv';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+$('#loginForm')?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const form = e.currentTarget;
+  const f = new FormData(form);
+  const loginError = $('#loginError');
+  try {
+    const session = await api('/api/auth', {
+      method: 'POST',
+      body: JSON.stringify({ email: f.get('email'), password: f.get('password') }),
+    });
+    token = session.access_token;
+    sessionStorage.setItem('pukkaAccessToken', token);
+    if (loginError) loginError.hidden = true;
+    await dashboard();
+  } catch (error) {
+    if (loginError) {
+      loginError.textContent = error.message;
+      loginError.hidden = false;
+    }
+  }
+});
+
+$('#logout')?.addEventListener('click', () => {
+  token = '';
+  sessionStorage.removeItem('pukkaAccessToken');
+  dashboard();
+});
+
+$('#regenerate')?.addEventListener('click', setProposed);
+
+$('#createShipment')?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const form = e.currentTarget;
+  const f = new FormData(form);
+  const message = $('#createdMessage');
+  const carrier = f.get('carrier');
+
+  const payload = {
+    tracking_id: proposed,
+    carrier,
+    carrier_waybill: (f.get('waybill') || '').trim() || null,
+    sender_name: f.get('senderName'),
+    sender_email: f.get('senderEmail'),
+    sender_phone: f.get('senderPhone'),
+    sender_street: f.get('senderStreet'),
+    recipient_name: f.get('recipient'),
+    recipient_email: f.get('recipientEmail'),
+    recipient_phone: f.get('recipientPhone'),
+    recipient_street: f.get('recipientStreet'),
+    origin: `${f.get('senderTown')}, ${f.get('senderCountry')}`,
+    destination: `${f.get('recipientTown')}, ${f.get('recipientCountry')}`,
+    weight_kg: Number(f.get('weight')),
+    price_ngn: Number(f.get('price')),
+  };
+
+  try {
+    const item = await api('/api/shipments', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    });
+
+    fetch('/api/notify-shipment', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        ...(token ? { Authorization: 'Bearer ' + token } : {}),
+      },
+      body: JSON.stringify({
+        id: item.tracking_id,
+        recipient: item.recipient_name,
+        recipientEmail: item.recipient_email,
+        origin: item.origin,
+        destination: item.destination,
+        carrier: item.carrier,
+        waybill: item.carrier_waybill,
+        weight: item.weight_kg,
+        price: item.price_ngn,
+      }),
+    }).catch(() => {});
+
+    if (message) {
+      message.innerHTML =
+        'Shipment created. Customer tracking ID: <strong>' +
+        item.tracking_id +
+        '</strong> <button type="button" id="copyTracking">⧉ Copy</button>';
+      message.hidden = false;
+      $('#copyTracking')?.addEventListener('click', async () => {
+        await navigator.clipboard.writeText(item.tracking_id);
+        const btn = $('#copyTracking');
+        if (btn) btn.textContent = 'Copied';
+      });
+    }
+
+    form.reset();
+    await render();
+    setProposed();
+  } catch (error) {
+    if (message) {
+      message.textContent = error.message;
+      message.hidden = false;
+    }
+  }
+});
+
+$('#statusUpdate')?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const form = e.currentTarget;
+  const f = new FormData(form);
+  const message = $('#statusMessage');
+  const trackingNumber = String(f.get('trackingNumber') || '').trim().toUpperCase();
+  const shipment = shipments.find((x) => String(x.tracking_id).toUpperCase() === trackingNumber);
+
+  if (!shipment) {
+    if (message) {
+      message.textContent = 'That Pukka tracking ID is not in the shipment register.';
+      message.hidden = false;
+    }
+    return;
+  }
+
+  try {
+    await api('/api/shipments', {
+      method: 'PATCH',
+      body: JSON.stringify({
+        shipment_id: shipment.id,
+        status: f.get('status'),
+        location: f.get('location'),
+        note: f.get('note'),
+      }),
+    });
+    if (message) {
+      message.textContent = 'Update published for ' + shipment.tracking_id + '.';
+      message.hidden = false;
+    }
+    form.reset();
+    await render();
+  } catch (error) {
+    if (message) {
+      message.textContent = error.message;
+      message.hidden = false;
+    }
+  }
+});
+
+$('#clearShipments')?.addEventListener('click', () => {
+  alert(
+    'Database records are intentionally not cleared from the browser. Remove records in Supabase only when required.'
+  );
+});
+
+$('#downloadCsv')?.addEventListener('click', downloadCsv);
+['filterSearch', 'filterStatus', 'filterFrom', 'filterTo'].forEach((id) => {
+  $('#' + id)?.addEventListener('input', applyFilters);
+});
+$('#clearFilters')?.addEventListener('click', () => {
+  ['filterSearch', 'filterStatus', 'filterFrom', 'filterTo'].forEach((id) => {
+    const el = $('#' + id);
+    if (el) el.value = '';
+  });
+  applyFilters();
+});
+
+dashboard();
